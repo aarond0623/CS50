@@ -1,11 +1,17 @@
-sort1 uses: TODO
+sort1 uses: Bubble sort
 
-How do you know?: TODO
+How do you know?: Although, like sort3, sort1 is much slower than sort2, it
+performs much faster when the data is already sorted. Unlike selection sort,
+bubble sort can "break out" of its algorithm if the data is already sorted,
+and can complete in O(n) instead of O(n^2).
 
-sort2 uses: TODO
+sort2 uses: Merge sort
 
-How do you know?: TODO
+How do you know?: sort2 is orders of magnitude faster than either of the other
+two sorting programs, even on the 50,000 element lists.
 
-sort3 uses: TODO
+sort3 uses: Selection sort
 
-How do you know?: TODO
+How do you know?: sort3 runs slowly regardless of whether the list is sorted
+(the best case) or in reverse order (the worst case). Selection sort must make
+all the same comparisons it does in its worst case, unlike bubble sort.
