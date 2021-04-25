@@ -248,11 +248,19 @@ bool is_cycle(int source, int cand_b)
     {
         return true;
     }
+    bool checks[MAX] = {false};
     for (int i = 0; i < candidate_count; i++)
     {
         if (locked[cand_b][i])
         {
-            return is_cycle(source, i);
+            checks[i] = is_cycle(source, i);
+        }
+    }
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (checks[i] == true)
+        {
+            return true;
         }
     }
     return false;
