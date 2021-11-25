@@ -1,4 +1,5 @@
 import csv
+import re
 
 
 def import_STR_data(filename):
@@ -23,3 +24,20 @@ def import_STR_data(filename):
     file.close()
 
     return data
+
+
+def count_STRs(str, dna):
+    """Counts the maximum occurence of consecutive repeats of a given STR.
+
+    Args:
+        str: A string of DNA nucleotides (A, G, T, C)
+        dna: A longer string of DNA nucleotides.
+
+    Returns:
+        The maximum integer of consecutive repeats of the given STR in the DNA
+        string.
+
+    """
+    sequences = re.findall(f'(?:{str})+', dna)
+    return int(max([len(x) for x in sequences]) / len(str))
+
