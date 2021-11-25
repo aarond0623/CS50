@@ -18,3 +18,8 @@ def import_STR_data(filename):
         A list of dicts with names and STR sequences.
 
     """
+    file = open(filename, 'r')
+    data = list(csv.DictReader(file))
+    file.close()
+
+    return data
