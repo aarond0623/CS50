@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Add result text for all questions.
+                let questions = document.querySelectorAll(".mc, .fr");
+                for (let i = 0; i < questions.length; i++)
+                {
+                    let result = document.createElement("h3");
+                    result.className = "result";
+                    // Initially text will be blank.
+                    let resultText = document.createTextNode("");
+                    result.appendChild(resultText);
+                    questions[i].appendChild(result);
+                    // Hide the field initially.
+                    result.hidden = true;
+                }
+                let buttons = document.querySelectorAll("button");
+                for (let i = 0; i < buttons.length; i++)
+                {
+                    // Event listener to void out all other buttons and show
+                    // result text.
+                    buttons[i].addEventListener("click", function(event) {
+                        result = event.target.parentElement.querySelector(".result");
+                        result.hidden = false;
+                        event.target.style.color = "white";
+                        otherButtons = event.target.parentElement.querySelectorAll("button");
+                        for (let j = 0; j < otherButtons.length; j++)
+                        {
+                            otherButtons[j].disabled = true;
+                        }
+                    });
+                }
+                // Define the right answers for multiple choice.
+                let answers_mc = ["q1a2"];
+                let mc = document.querySelectorAll("div.mc");
+                for (let i = 0; i < mc.length; i++)
+                {
+                    buttons = mc[i].querySelectorAll("button");
+                    for (let j = 0; j < buttons.length; j++)
+                    {
+                        if (answers_mc.indexOf(buttons[j].id) !== -1)
+                        {
+                            buttons[j].addEventListener("click", function(event) {
+                                // Turn green, show result.
+                                event.target.style.backgroundColor = "green";
+                                result.innerHTML = "Correct!";
+                            });
+                        }
+                        else
+                        {
+                            buttons[j].addEventListener("click", function(event) {
+                                // Turn red, show result.
+                                event.target.style.backgroundColor = "red";
+                                result.innerHTML = "Incorrect";
+                            });
+                        }
+                    }
+                }
+                let answers_fr = {"q2": "apple"};
+                let fr = document.querySelectorAll("div.fr");
+                for (let i = 0; i < fr.length; i++)
+                {
+                    button = fr[i].querySelector("button");
+                    result = fr[i].querySelector(".result");
+                    button.addEventListener("click", function(event){
+                        question = event.target.parentElement.id;
+                        answer = fr[i].querySelector("input").value;
+                        // Check answer, case insensitive.
+                        if(answers_fr[question] === answer.toLowerCase())
+                        {
+                            event.target.style.backgroundColor = "green";
+                            result.innerHTML = "Correct!";
+                        }
+                        else
+                        {
+                            event.target.style.backgroundColor = "red";
+                            result.innerHTML = "Incorrect";
+                        }
+                    })
+                }
+            });
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <div class="mc" id="q1">
+                    <h3>
+                        Which of the following was <i>not</i> one of the seven dwarfs?
+                    </h3>
+
+                    <button id="q1a1">Bashful</button>
+                    <button id="q1a2">Mopey</button>
+                    <button id="q1a3">Grumpy</button>
+                    <button id="q1a4">Sneezy</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+
+                <div class="fr" id="q2">
+                    <h3>
+                        What fruit was given to Snow White by the queen?
+                    </h3>
+                    <input autocomplete="off" type="text">
+                    <button>Check Answer</button>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
